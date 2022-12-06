@@ -24,6 +24,14 @@ class ServerSocket(threading.Thread):
         Se o cliente saiu da conexão, fecha o socket conectado e remove a si mesmo da lista
         de threads ServerSocket no thread de servidor pai.
         """
+        if len(self.server.connections) > 1:
+            print('limit connections')
+            self.sc.close()
+            self.server.remove_connection(self)
+            return
+        else:
+            print(self.server.connections)
+
         while True:
             message = self.sc.recv(1024).decode('ascii')
             if message:
