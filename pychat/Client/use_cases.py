@@ -5,6 +5,15 @@ import tkinter as tk
 from datetime import datetime
 from pychat.Client.send import Send
 from pychat.Client.receive import Receive
+from tkinter import *
+
+
+BG_GRAY = "#92ccb6"
+BG_COLOR = "#8e8ca3"
+TEXT_COLOR = "#EAECEE"
+
+FONT = "Helvetica 12"
+FONT_BOLD = "Helvetica 11 bold"
 
 
 def get_name(entry, window, obj):
@@ -56,22 +65,20 @@ class Client:
         window = tk.Tk()
         window.title('Cliente - Nome')
         window.resizable(height=False, width=False)
-        if os.name == 'nt':
-            window.iconbitmap('img/logo_2.ico')
         host_input = tk.Entry(
             master=window,
             width='50',
             borderwidth=18,
             bg='#ccc',
             relief=tk.FLAT,
-            font='Times 10',
+            font=FONT_BOLD,
         )
         host_input.pack(fill=tk.BOTH, expand=True)
         host_input.bind("<Return>", lambda x: get_name(host_input, window, self))
-        host_input.insert(0, "Digite o nome desejado sem caracteres especiais.")
+        host_input.insert(0, "Bem-vindo, qual seu nome?")
         host_input.bind("<Button-1>", lambda x: host_input.delete(0, tk.END))
 
-        width = 350
+        width = 500
         heigth = 50
         x = (window.winfo_screenwidth() // 2) - (width // 2)
         y = (window.winfo_screenheight() // 2) - (heigth // 2)

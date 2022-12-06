@@ -2,7 +2,15 @@
 import os
 import tkinter as tk
 import pychat.Client as Client
+from tkinter import *
 
+
+BG_GRAY = "#92ccb6"
+BG_COLOR = "#8e8ca3"
+TEXT_COLOR = "#EAECEE"
+
+FONT = "Helvetica 12"
+FONT_BOLD = "Helvetica 11 bold"
 
 def main(host, port):
     """
@@ -16,20 +24,18 @@ def main(host, port):
     client = Client.Client(host, port)
     receive = client.start()
     window = tk.Tk()
-    window.title('pychat')
+    window.title('PyChat')
     window.resizable(height=False, width=False)
-    if os.name == 'nt':
-        window.iconbitmap('img/logo_2.ico')
-    window.config(background='#3c3939')
+    window.config(background=BG_COLOR)
 
     # Componentes
-    frm_messages = tk.Frame(master=window, bg='#3c3939')
+    frm_messages = tk.Frame(master=window, bg=BG_COLOR)
     scrollbar = tk.Scrollbar(master=frm_messages)
     messages = tk.Listbox(
         master=frm_messages,
         yscrollcommand=scrollbar.set,
-        fg='white',
-        bg='#3c3939',
+        fg=TEXT_COLOR,
+        bg=BG_COLOR,
         borderwidth=0,
         highlightthickness=0,
         selectbackground="Red",
@@ -49,10 +55,10 @@ def main(host, port):
     text_input = tk.Entry(
         master=frm_entry,
         borderwidth=18,
-        bg='#524f4f',
+        bg=BG_GRAY,
         fg='white',
         relief=tk.FLAT,
-        font='Times 10',
+        font=FONT,
     )
     text_input.pack(fill=tk.BOTH, expand=True)
     text_input.bind("<Return>", lambda x: client.send(text_input))
@@ -92,20 +98,18 @@ if __name__ == "__main__":
     window = tk.Tk()
     window.title('Cliente - Conexão ao Host')
     window.resizable(height=False, width=False)
-    if os.name == 'nt':
-        window.iconbitmap('img/logo_2.ico')
     host_input = tk.Entry(
         master=window,
         width='50',
         borderwidth=18,
-        bg='#ccc',
+        bg=BG_COLOR,
         relief=tk.FLAT,
-        font='Times 10',
+        font=FONT,
     )
     host_input.pack(fill=tk.BOTH, expand=True)
     host_input.bind("<Return>", lambda x: redirect(host_input.get(), 1060, window))
     host_input.insert(
-        0, "Digite o endereço de Host que deseja se Conectar, ex: localhost"
+        0, "Host para conexão: (sugerido: localhost)"
     )
     host_input.bind("<Button-1>", lambda x: host_input.delete(0, tk.END))
 
