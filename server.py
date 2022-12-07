@@ -4,16 +4,18 @@ import threading
 import pychat.Server as Server
 import pychat.utils as utils
 import tkinter as tk
+from tkinter import *
+
+
+BG_GRAY = "#92ccb6"
+BG_COLOR = "#8e8ca3"
+TEXT_COLOR = "#EAECEE"
+
+FONT = "Helvetica 14"
+FONT_BOLD = "Helvetica 13 bold"
 
 
 def start_server(host, window):
-    """
-    Inicia o servidor com base no host passado na GUI.
-
-    Attributes:
-            host (str): Endereço IP servidor.
-            window (tk.Frame): Objeto tk.Frame que contém a interface GUI para entrada do nome do servidor.
-    """
     window.destroy()
     server = Server.Server(host, 1060)
     server.start()
@@ -24,25 +26,26 @@ def start_server(host, window):
 
 if __name__ == "__main__":
     window = tk.Tk()
-    window.title('Conexão do Server')
+    window.title('PyChat: Servidor')
     window.resizable(height=False, width=False)
-    if os.name == 'nt':
-        window.iconbitmap('img/logo_2.ico')
     host_input = tk.Entry(
         master=window,
-        width='50',
-        borderwidth=18,
-        bg='#ccc',
+        width='100',
+        borderwidth=30,
+        bg=BG_COLOR,
+        fg=TEXT_COLOR,
         relief=tk.FLAT,
-        font='Times 10',
+        font=FONT,
     )
+
     host_input.pack(fill=tk.BOTH, expand=True)
-    host_input.bind("<Return>", lambda x: start_server(host_input.get(), window))
-    host_input.insert(0, "Digite o endereço de host para o servidor: localhost")
+    host_input.bind("<Return>", lambda x: start_server(
+        host_input.get(), window))
+    host_input.insert(0, "Digite o endereço de host: (sugerido localhost)")
     host_input.bind("<Button-1>", lambda x: host_input.delete(0, tk.END))
 
-    width = 450
-    heigth = 50
+    width = 500
+    heigth = 75
     x = (window.winfo_screenwidth() // 2) - (width // 2)
     y = (window.winfo_screenheight() // 2) - (heigth // 2)
     window.geometry('{}x{}+{}+{}'.format(width, heigth, x, y))
