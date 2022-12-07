@@ -33,6 +33,8 @@ A escolha do protocolo foi o TCP, pois, apesar do software não pretender carreg
 
 ### Documentação do protocolo
 
+https://github.com/isantana3/pychat/blob/main/pychat/img/protocologif.gif
+
 ### Documentação do software
 
 Para usar o software é necessário primeiro ter uma máquina como _servidor_ para hostear os _clientes_ que se conectarão entre si
