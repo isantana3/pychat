@@ -33,7 +33,7 @@ A escolha do protocolo foi o TCP, pois, apesar do software não pretender carreg
 
 ### Documentação do protocolo
 
-https://github.com/isantana3/pychat/blob/main/pychat/img/protocologif.gif
+![](https://github.com/isantana3/pychat/blob/main/pychat/img/protocologif.gif)
 
 ### Documentação do software
 
