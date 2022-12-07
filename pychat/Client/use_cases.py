@@ -48,7 +48,9 @@ class Client:
                 Um objeto Receive que representa o segmento de recebimento.
         """
         print(f'Tentando se conecatar com {self.host}:{self.port}...')
-        print(type(self.host))
+        self.sock.connect((self.host, self.port))
+        self.port = self.sock.recv(1024).decode('ascii')
+        self.sock.close()
         self.sock.connect((self.host, self.port))
         print(f'Conectado com sucesso a {self.host}:{self.port}\n')
 

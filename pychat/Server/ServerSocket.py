@@ -31,7 +31,7 @@ class ServerSocket(threading.Thread):
             return
         else:
             print(self.server.connections)
-
+        self.sc.sendall(f'1313'.encode('ascii'))
         while True:
             message = self.sc.recv(1024).decode('ascii')
             if message:
