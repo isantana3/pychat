@@ -1,5 +1,6 @@
 """Inicialização do servidor e sua interface GUI"""
 import os
+import sqlite3
 import threading
 import pychat.Server as Server
 import pychat.utils as utils
@@ -27,6 +28,28 @@ def start_server(host, window):
 
 
 if __name__ == "__main__":
+    try:
+        sqliteConnection = sqlite3.connect('.port_alocation.db')
+        sqlite_drop_table = '''DROP table IF EXISTS tbl_ports;'''
+        sqlite_create_table_query = '''CREATE TABLE tbl_ports (
+                                    id INTEGER PRIMARY KEY,
+                                    connections INTEGER NOT NULL);'''
+
+        cursor = sqliteConnection.cursor()
+        print('Preparando Configurações de banco de dados...')
+        cursor.execute(sqlite_drop_table)
+        cursor.execute(sqlite_create_table_query)
+        sqliteConnection.commit()
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Erro ao preparar o banco de dados ", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print('Banco de dados configurado!')
+
     window = tk.Tk()
     window.title('PyChat: Servidor')
     window.resizable(height=False, width=False)

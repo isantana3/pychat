@@ -13,7 +13,8 @@ def exit(server):
         ipt = input('')
         if ipt == 'q':
             print('Fechando todas as conexoes...')
-            for connection in server.connections:
-                connection.sc.close()
+            for subserver in server.servers:
+                for connection in subserver.connections:
+                    connection.sc.close()
             print('Desligando o servidor ...')
             os._exit(0)
