@@ -62,9 +62,8 @@ class Client:
         alt_port = self.sock.recv(1024).decode('ascii')
         print(f'Redirecionando para {self.host}:{alt_port}...\n')
         self.sock.close()
-        time.sleep(
-            1
-        )  # Bota fé que sem isso n funciona? O pior é que faz sentido mesmo kkk
+        # Bota fé que sem isso n funciona? O pior é que faz sentido mesmo kkk
+        time.sleep(1)
         self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.sock.connect((self.host, int(alt_port)))
         print(f'Conectado com sucesso a {self.host}:{alt_port}\n')
