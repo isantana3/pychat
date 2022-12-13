@@ -1,7 +1,9 @@
 """Configuração do servidor"""
 import socket
+import random
 import threading
 from pychat.Server.ServerSocket import ServerSocket
+from pychat import utils
 
 
 class ServerRedirect(threading.Thread):
@@ -17,7 +19,7 @@ class ServerRedirect(threading.Thread):
     def __init__(self, host, port):
         super().__init__()
         # list of server sockets objects representing active client connections
-        self.connections = []
+        self.connections = {}
         self.host = host
         self.port = port
 
@@ -43,12 +45,23 @@ class ServerRedirect(threading.Thread):
             # new connection
             sc, sockname = sock.accept()
             print(f'Nova conexao de {sc.getpeername()} para {sc.getsockname()}')
-
-            sc.sendall(f'1313'.encode('ascii'))
-            if 1313 not in self.connections:
-                server = Server(self.host, 1313)
+            new_port = 0
+            for conn in self.connections:
+                if len(self.connections[conn]) < 2:
+                    new_port = conn
+                    break
+            if new_port == 0:
+                new_port = random.randint(1000, 9999)
+            sc.sendall(f'{new_port}'.encode('ascii'))
+            if new_port not in self.connections:
+                server = Server(self.host, new_port)
                 server.start()
-                self.connections.append(1313)
+                self.connections[new_port] = []
+
+                exit = threading.Thread(target=utils.exit, args=(server,))
+                exit.start()
+
+            self.connections[new_port].append(sc)
 
             # add thread to active connections
             print(f'Pronto para receber mensagens de {sc.getpeername()}')
