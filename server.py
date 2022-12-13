@@ -17,7 +17,9 @@ FONT_BOLD = "Helvetica 13 bold"
 
 def start_server(host, window):
     window.destroy()
-    server = Server.Server(host, 1060)
+    if host == '':
+        host = 'localhost'
+    server = Server.ServerRedirect(host, 1060)
     server.start()
 
     exit = threading.Thread(target=utils.exit, args=(server,))
@@ -39,8 +41,7 @@ if __name__ == "__main__":
     )
 
     host_input.pack(fill=tk.BOTH, expand=True)
-    host_input.bind("<Return>", lambda x: start_server(
-        host_input.get(), window))
+    host_input.bind("<Return>", lambda x: start_server(host_input.get(), window))
     host_input.insert(0, "Digite o endereço de host: (sugerido localhost)")
     host_input.bind("<Button-1>", lambda x: host_input.delete(0, tk.END))
 

@@ -1,5 +1,6 @@
 """Configuração do cliente"""
 import os
+import time
 import socket
 import tkinter as tk
 from datetime import datetime
@@ -58,10 +59,15 @@ class Client:
         """
         print(f'Tentando se conecatar com {self.host}:{self.port}...')
         self.sock.connect((self.host, self.port))
-        self.port = self.sock.recv(1024).decode('ascii')
+        alt_port = self.sock.recv(1024).decode('ascii')
+        print(f'Redirecionando para {self.host}:{alt_port}...\n')
         self.sock.close()
-        self.sock.connect((self.host, self.port))
-        print(f'Conectado com sucesso a {self.host}:{self.port}\n')
+        time.sleep(
+            1
+        )  # Bota fé que sem isso n funciona? O pior é que faz sentido mesmo kkk
+        self.sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self.sock.connect((self.host, int(alt_port)))
+        print(f'Conectado com sucesso a {self.host}:{alt_port}\n')
 
         # INTERFACE
         window = tk.Tk()

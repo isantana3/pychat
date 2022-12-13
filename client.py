@@ -12,6 +12,7 @@ TEXT_COLOR = "#EAECEE"
 FONT = "Helvetica 12"
 FONT_BOLD = "Helvetica 11 bold"
 
+
 def main(host, port):
     """
     Configuração do cliente e inicializa a interface gráfica.
@@ -89,6 +90,8 @@ def redirect(host, port, window):
             window (tk.Frame): Objeto tk.Frame que contém a interface GUI que será destruida para criação da tela da sala de bate papo.
     """
     host = host_input.get()
+    if host == '':
+        host = 'localhost'
     window.destroy()
     main(host, 1060)
 
@@ -108,9 +111,7 @@ if __name__ == "__main__":
     )
     host_input.pack(fill=tk.BOTH, expand=True)
     host_input.bind("<Return>", lambda x: redirect(host_input.get(), 1060, window))
-    host_input.insert(
-        0, "Host para conexão: (sugerido: localhost)"
-    )
+    host_input.insert(0, "Host para conexão: (sugerido: localhost)")
     host_input.bind("<Button-1>", lambda x: host_input.delete(0, tk.END))
 
     width = 450
