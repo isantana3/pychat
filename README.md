@@ -41,7 +41,7 @@ Para usar o software é necessário primeiro ter uma máquina como _servidor_ pa
 
 #### Servidor
 
-Para levantar o servidor, basta digitar em, um termianl, o seguinte comando
+Para levantar o servidor, basta digitar em, um terminal, o seguinte comando
 `python3 servidor.py`
 Uma janela irá aparecer para que preencha qual o endereço IP do servidor. Pronto, o servidor está online!
 
@@ -51,6 +51,14 @@ Para executar o cliente, o processo inicial é semelhante ao servidor, basta exe
 `python3 client.py`
 Em seguida aparecerá uma janela pedindo para inserir o id do servidor
 Após conectar com o servidor, basta dizer seu nome e pronto, já pode conversar!
+
+### Sobre o Software
+
+O servidor suporta até 8998 salas de chat de até dois clientes. A escolha da sala é aleatória, mas o cliente de numero par só pode se conectar a uma sala ja existente. 
+
+Um Chat terminado é apagado e poderá ser iniciada novamente. 
+
+Não é possível entrar mais de dois clientes em uma mesma sala, assim como não é possível escolher a sala que você entra, como na inspiração original o Omegle.
 
 #### Diversos
 
