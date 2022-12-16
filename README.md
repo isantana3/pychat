@@ -45,6 +45,7 @@ Para levantar o servidor, basta digitar em, um terminal, o seguinte comando
 `python3 servidor.py`
 
 ![](pychat/img/Screenshot 2022-12-06 203030.png)
+
 Uma janela irá aparecer para que preencha qual o endereço IP do servidor. Pronto, o servidor está online!
 
 
@@ -52,28 +53,41 @@ Uma janela irá aparecer para que preencha qual o endereço IP do servidor. Pron
 
 Para executar o cliente, o processo inicial é semelhante ao servidor, basta executar o seguinte comando
 `python3 client.py`
+
 ![](pychat/img/pyclient.png)
+
 Em seguida aparecerá uma janela pedindo para inserir o id do servidor
+
 ![](pychat/img/conexao-py.png)
 
 Após conectar com o servidor, basta dizer seu nome
+
 ![](pychat/img/bemvindo.png)
+
 Então é aberta a sala de chat, e você está pronto para conversar!
+
 ![](pychat/img/pychat.png)
 
 ### Sobre o Software
 
 O servidor suporta até 8973 salas de chat de até dois clientes. A escolha da sala é aleatória, mas o cliente de numero par só pode se conectar a uma sala ja existente. 
+
 ![](pychat/img/sidebyside-chat.png)
+
 Um Chat terminado é apagado e poderá ser iniciada novamente. 
+
 ![](pychat/img/chat-quit.png)
 
 Não é possível entrar mais de dois clientes em uma mesma sala, assim como não é possível escolher a sala que você entra, como na inspiração original o Omegle.
 
 O servidor envia notificações a cada vez que um chat recebe uma nova mensagem, ou quando um novo client entra no servidor
+
 ![](pychat/img/notification.png)
+
 ![](pychat/img/mingau-join.png)
+
 ![](pychat/img/notification-message.png)
+
 #### Diversos
 
 Para fechar o chat(client), basta digitar 'QUIT'
