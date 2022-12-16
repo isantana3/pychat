@@ -39,7 +39,7 @@ def main(host, port):
         bg=BG_COLOR,
         borderwidth=0,
         highlightthickness=0,
-        selectbackground="Red",
+        selectbackground="BG_GRAY",
         highlightcolor="Green",
     )
     scrollbar.pack(side=tk.RIGHT, fill=tk.Y, expand=False)
