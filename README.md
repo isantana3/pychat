@@ -44,7 +44,7 @@ Para usar o software é necessário primeiro ter uma máquina como _servidor_ pa
 Para levantar o servidor, basta digitar em, um terminal, o seguinte comando
 `python3 servidor.py`
 
-![](pychat/img/Screenshot 2022-12-06 203030.png)
+![](https://github.com/isantana3/pychat/blob/c640de049b637a43f4e898249f4d119ab5b97c9e/pychat/img/Screenshot%202022-12-06%20203030.png)
 
 Uma janela irá aparecer para que preencha qual o endereço IP do servidor. Pronto, o servidor está online!
 
