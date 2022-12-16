@@ -1,5 +1,6 @@
 """Inicialização do servidor e sua interface GUI"""
 import os
+import sqlite3
 import threading
 import pychat.Server as Server
 import pychat.utils as utils
@@ -17,7 +18,9 @@ FONT_BOLD = "Helvetica 13 bold"
 
 def start_server(host, window):
     window.destroy()
-    server = Server.Server(host, 1060)
+    if host == '':
+        host = 'localhost'
+    server = Server.ServerRedirect(host, 1025)
     server.start()
 
     exit = threading.Thread(target=utils.exit, args=(server,))
@@ -25,6 +28,28 @@ def start_server(host, window):
 
 
 if __name__ == "__main__":
+    try:
+        sqliteConnection = sqlite3.connect('.port_alocation.db')
+        sqlite_drop_table = '''DROP table IF EXISTS tbl_ports;'''
+        sqlite_create_table_query = '''CREATE TABLE tbl_ports (
+                                    id INTEGER PRIMARY KEY,
+                                    connections INTEGER NOT NULL);'''
+
+        cursor = sqliteConnection.cursor()
+        print('Preparando Configurações de banco de dados...')
+        cursor.execute(sqlite_drop_table)
+        cursor.execute(sqlite_create_table_query)
+        sqliteConnection.commit()
+
+        cursor.close()
+
+    except sqlite3.Error as error:
+        print("Erro ao preparar o banco de dados ", error)
+    finally:
+        if sqliteConnection:
+            sqliteConnection.close()
+            print('Banco de dados configurado!')
+
     window = tk.Tk()
     window.title('PyChat: Servidor')
     window.resizable(height=False, width=False)
@@ -39,8 +64,7 @@ if __name__ == "__main__":
     )
 
     host_input.pack(fill=tk.BOTH, expand=True)
-    host_input.bind("<Return>", lambda x: start_server(
-        host_input.get(), window))
+    host_input.bind("<Return>", lambda x: start_server(host_input.get(), window))
     host_input.insert(0, "Digite o endereço de host: (sugerido localhost)")
     host_input.bind("<Button-1>", lambda x: host_input.delete(0, tk.END))
 
