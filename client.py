@@ -76,7 +76,6 @@ def main(host, port):
     x = (window.winfo_screenwidth() // 2) - (width // 2)
     y = (window.winfo_screenheight() // 2) - (heigth // 2)
     window.geometry('{}x{}+{}+{}'.format(width, heigth, x, y))
-
     window.mainloop()
 
 
@@ -93,7 +92,7 @@ def redirect(host, port, window):
     if host == '':
         host = 'localhost'
     window.destroy()
-    main(host, 1060)
+    main(host, 1025)
 
 
 if __name__ == "__main__":
@@ -110,7 +109,7 @@ if __name__ == "__main__":
         font=FONT,
     )
     host_input.pack(fill=tk.BOTH, expand=True)
-    host_input.bind("<Return>", lambda x: redirect(host_input.get(), 1060, window))
+    host_input.bind("<Return>", lambda x: redirect(host_input.get(), 1025, window))
     host_input.insert(0, "Host para conexão: (sugerido: localhost)")
     host_input.bind("<Button-1>", lambda x: host_input.delete(0, tk.END))
 
@@ -119,5 +118,4 @@ if __name__ == "__main__":
     x = (window.winfo_screenwidth() // 2) - (width // 2)
     y = (window.winfo_screenheight() // 2) - (heigth // 2)
     window.geometry('{}x{}+{}+{}'.format(width, heigth, x, y))
-
     window.mainloop()

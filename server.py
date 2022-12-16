@@ -20,7 +20,7 @@ def start_server(host, window):
     window.destroy()
     if host == '':
         host = 'localhost'
-    server = Server.ServerRedirect(host, 1060)
+    server = Server.ServerRedirect(host, 1025)
     server.start()
 
     exit = threading.Thread(target=utils.exit, args=(server,))

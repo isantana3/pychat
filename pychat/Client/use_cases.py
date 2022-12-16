@@ -90,10 +90,7 @@ class Client:
         x = (window.winfo_screenwidth() // 2) - (width // 2)
         y = (window.winfo_screenheight() // 2) - (heigth // 2)
         window.geometry('{}x{}+{}+{}'.format(width, heigth, x, y))
-
         window.mainloop()
-
-        # self.name = input('Your name: ')
 
         print(f'\nBem Vindo, {self.name}! Preparando para enviar mensagens...')
 

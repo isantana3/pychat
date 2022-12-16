@@ -24,6 +24,11 @@ class ServerRedirect(threading.Thread):
         self.port = port
 
     def _get_port(self):
+        """
+        Verifica no banco de dados se existe alguma porta com somente 1 conexão, caso exista,
+        retorna a porta encontrada, caso contrário, sorteia uma nova prota.
+
+        """
         sqliteConnection = sqlite3.connect('.port_alocation.db')
         cursor = sqliteConnection.cursor()
         select_disponible_connection = (
@@ -40,7 +45,7 @@ class ServerRedirect(threading.Thread):
         else:
             cursor.execute(select_all_connections)
             query = cursor.fetchall()
-            port = random.choice([i for i in range(1000, 9999) if i not in query])
+            port = random.choice([i for i in range(1026, 9999) if i not in query])
             new_connection = True
             print(f'Sala {port} criada para novo usuário')
 
@@ -100,6 +105,13 @@ class Server(threading.Thread):
         self.port = port
 
     def _insert_port_connection(self, port: int):
+        """
+        Insere uma nova porta no banco de dados e inicializa como tendo somente 1 conexão
+
+        Atributes:
+            port: porta da conexão, varia de 1001 a 9999
+        """
+
         sqliteConnection = sqlite3.connect('.port_alocation.db')
         cursor = sqliteConnection.cursor()
         insert_connection = (
@@ -112,6 +124,13 @@ class Server(threading.Thread):
         return cursor.rowcount
 
     def _update_connection(self, port: int, conn: int):
+        """
+        Atualzia a quantidade de conexões numa porta, a quantidade atualizada de conexões pode ser 1 ou 2
+
+        Atributes:
+            port: porta da conexão, varia de 1001 a 9999
+            port: Número de conexões na porta (1 ou 2)
+        """
         sqliteConnection = sqlite3.connect('.port_alocation.db')
         cursor = sqliteConnection.cursor()
         update_connection = (
@@ -124,6 +143,13 @@ class Server(threading.Thread):
         return cursor.rowcount
 
     def _delete_connection(self, port: int):
+        """
+        Deleta porta no banco de dados
+
+        Atributes:
+            port: porta da conexão, varia de 1001 a 9999
+        """
+
         sqliteConnection = sqlite3.connect('.port_alocation.db')
         cursor = sqliteConnection.cursor()
         delete_connection = f'''DELETE FROM tbl_ports WHERE id = {port};'''
